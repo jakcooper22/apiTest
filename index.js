@@ -1,5 +1,13 @@
 var http = require('http');
 
+let parsedData = String
+
+//function httpServer(dataStuff) {
+
+    
+
+//}
+
 http.get('http://jsonplaceholder.typicode.com/posts', (res) => {
 
     const { statusCode } = res;
@@ -25,8 +33,8 @@ http.get('http://jsonplaceholder.typicode.com/posts', (res) => {
     res.on('data', (chunk) => { rawData += chunk});
     res.on('end', () => {
         try {
-            const parsedData = JSON.parse(rawData);
-            console.log(parsedData);
+            parsedData = JSON.parse(rawData);
+            console.log(parsedData);     
         }catch (e) {
             console.error(e.message);
         }
@@ -35,3 +43,19 @@ http.get('http://jsonplaceholder.typicode.com/posts', (res) => {
 }).on('error', (e) => {
     console.log(`Error: ${e.message}`);
 });
+
+//httpServer(parsedData)
+
+http.createServer(function (req,res) {
+
+    console.log(req.url);
+
+    if (req = '/') {
+        console.log('accessed')
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(`<h5> ${JSON.stringify(parsedData)} <h5>`);
+        res.end()
+    }
+
+}).listen('2222');
+
