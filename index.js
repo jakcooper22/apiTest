@@ -1,4 +1,6 @@
 var http = require('http');
+var urlParse = require('url');
+const util = require('util');
 
 let parsedData = String
 
@@ -49,6 +51,7 @@ http.get('http://jsonplaceholder.typicode.com/posts', (res) => {
 http.createServer(function (req,res) {
 
     console.log(req.url);
+    console.log(util.inspect(urlParse.parse(req.url, true).query));
 
     if (req = '/') {
         console.log('accessed')
